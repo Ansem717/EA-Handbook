@@ -1,0 +1,19 @@
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav > img {
+    padding: 5px;
+}
+
+.nav-logo {
+    width: 87px;
+    height: 83px;
+}
+
+.nav-search, .nav-profile {
+    width: 55px;
+    height: 55px;
+}

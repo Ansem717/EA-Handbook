@@ -1,0 +1,25 @@
+
+.handbook { 
+    background-color: #faf8f1;
+    margin-left: 110px;
+    margin-top: -25px;
+    min-height: calc(100vh - 88px);
+}
+
+.bookTitle, .chapterTitle {
+    padding-left: 18px;
+    padding-top: 10px;
+    margin-bottom: -10px;
+}
+
+.chapterTitle {
+    padding-left: 30px;
+}
+
+.handbook:before {
+    content: "";
+    position: absolute;
+    background-color: #faf8f1;
+    height: 100%;
+    z-index: -1;
+}
