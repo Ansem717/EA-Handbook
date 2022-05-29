@@ -1,0 +1,15 @@
+
+
+.handbook-navigation {
+    padding-right: 50px;
+}
+
+.contribute {
+    display: flex;
+    align-items: center;
+}
+
+.hamburger {
+    width: 30px;
+    padding: 7px;
+}

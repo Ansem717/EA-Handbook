@@ -1,8 +1,15 @@
 
 .page {
-    margin: 40px;
+    margin-left: 40px;
+    margin-top: 25px;
     font-family: Arial, Arial;
     font-size: 14px;
     font-weight: 400;
     color: #333333;
+}
+
+.bookTitle {
+    padding-left: 18px;
+    padding-top: 10px;
+    margin-bottom: -10px;
 }

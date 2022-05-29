@@ -15,5 +15,6 @@
 
 .nav-search, .nav-profile {
     width: 55px;
-    height: 55px;
+    height: 55px;    
+    filter: invert(15%) sepia(97%) saturate(7448%) hue-rotate(202deg) brightness(57%) contrast(126%);
 }
