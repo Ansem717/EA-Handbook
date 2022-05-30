@@ -2,10 +2,12 @@
 .search-results {
     list-style-type: none;
     padding-inline-start: 20px;
+    height: calc(100vh - 170px);
+    overflow: scroll;
 }
 
 .search-results > li {
-    margin: 12px 0px;
+    margin: 20px 0px;
     font-family: Arial, Arial;
     font-size: 14px;
     font-weight: 400;

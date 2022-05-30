@@ -3,11 +3,18 @@ import { TextField, InputAdornment, Box } from '@mui/material';
 import SearchResults from './SearchResults';
 import '../css/search-navigation.css';
 import classNames from 'classnames';
+import { useState } from 'react';
 
 function SearchNavigation({ open }) {
   const displaySearchNav = classNames('search-navigation', {
     open: open,
   });
+
+  const [inputText, setInputText] = useState("");
+  let searchHandler = (e) => {
+    var lowercase = e.target.value.toLowerCase();
+    setInputText(lowercase);
+  }
 
   return (
     <nav className={displaySearchNav}>
@@ -15,6 +22,7 @@ function SearchNavigation({ open }) {
         <TextField
             id="outlined-basic"
             variant="outlined"
+            onChange={searchHandler}
             className='search-box'
             InputProps={{
               endAdornment: (
@@ -25,7 +33,7 @@ function SearchNavigation({ open }) {
             }}
         />
       </Box>
-      <SearchResults />
+      <SearchResults input={inputText} />
     </nav>
   );
 }

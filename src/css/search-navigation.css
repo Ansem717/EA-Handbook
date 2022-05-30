@@ -4,10 +4,11 @@
     z-index: 1;
     position: fixed;
     top: 100px;
-    width: 300px;
+    --width: 370px;
+    width: var(--width);
 
     /*Hide content*/
-    left: -300px;
+    left: calc(var(--width) * -1);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.75s, visibility 0.75s, left 0.75s;
@@ -20,6 +21,6 @@
 }
 
 .search-box {
-    background-color: #ddd;
-    width: 280px;
+    background-color: #eee;
+    width: calc(var(--width) - 1em)
 }

@@ -1,11 +1,19 @@
+import data from '../js/ListData.json';
 import '../css/search-results.css';
 
-function SearchResults() {
+function SearchResults(props) {
+  const filteredData = data.filter((el) => {
+    if (props.input === '') {
+      return el;
+    } else {
+      return el.text.toLowerCase().includes(props.input);
+    }
+  })
   return (
     <ul className='search-results'>
-      <li>test1</li>
-      <li>foo</li>
-      <li>bar</li>
+      {filteredData.map((item) => (
+                <li key={item.id}>{item.text}</li>
+      ))}
     </ul>
   );
 }
