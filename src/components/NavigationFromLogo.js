@@ -1,9 +1,14 @@
 import downArrow from '../images/down_arrow.svg';
 import '../css/navigation-from-logo.css';
+import classNames from 'classnames';
 
-function NavigationFromLogo() {
+function NavigationFromLogo({ open }) {
+  const displayLogoNavLinks = classNames('navigation-from-logo', {
+    open: open,
+  });
+
   return (
-    <nav className="navigation-from-logo">
+    <nav className={displayLogoNavLinks}>
         <ul className="nfl-main">
           <li>EA Handbook Project <img src={downArrow} className="leftArrow" alt=""/></li>
           <ul className="nfl-sub">

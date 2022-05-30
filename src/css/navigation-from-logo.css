@@ -1,9 +1,23 @@
 
 .navigation-from-logo {
-    position: absolute;
-    /*background-color: #F0FAD2; */
-    background-color: #000;
+    background-color: #F0FAD2;
+    z-index: 1;
+    position: fixed;
+    top: 100px;
     width: 216px;
+
+    /*Hide content*/
+    left: -216px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.75s, visibility 0.75s, left 0.75s;
+    overflow: hidden;
+}
+
+.navigation-from-logo.open {
+    opacity: 1;
+    visibility: visible;
+    left: 6px;
 }
 
 .nfl-main  {

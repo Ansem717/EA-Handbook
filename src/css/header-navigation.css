@@ -13,6 +13,11 @@
     height: 83px;
 }
 
+.nav-logo-button {
+    background: none;
+    border: none;
+}
+
 .nav-search, .nav-profile {
     width: 55px;
     height: 55px;    
