@@ -1,4 +1,4 @@
-import '../css/handbook-page.css';<br/>
+import '../css/handbook-page.css';
 
 function HandbookPage() {
   return (

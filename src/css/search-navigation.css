@@ -1,0 +1,25 @@
+
+.search-navigation {
+    background-color: #DDDCF2;
+    z-index: 1;
+    position: fixed;
+    top: 100px;
+    width: 300px;
+
+    /*Hide content*/
+    left: -300px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.75s, visibility 0.75s, left 0.75s;
+}
+
+.search-navigation.open {
+    opacity: 1;
+    visibility: visible;
+    left: 6px;
+}
+
+.search-box {
+    background-color: #ddd;
+    width: 280px;
+}

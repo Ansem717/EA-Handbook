@@ -1,0 +1,14 @@
+
+.search-results {
+    list-style-type: none;
+    padding-inline-start: 20px;
+}
+
+.search-results > li {
+    margin: 12px 0px;
+    font-family: Arial, Arial;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    padding: 0px 0px 0px 5px;
+}
