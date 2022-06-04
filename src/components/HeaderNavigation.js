@@ -18,6 +18,8 @@ function HeaderNavigation() {
           aria-label='Toggle Main Menu Button'
           className="nav-logo-button"
           onClick={() => {
+            setSearchNavOpen(false);
+            setProfileNavOpen(false);
             setLogoNavOpen((logoNavOpen) => !logoNavOpen);
           }}
         >
@@ -29,6 +31,8 @@ function HeaderNavigation() {
           aria-label="toggle search menu button"
           className='nav-search-button'
           onClick={() => {
+            setLogoNavOpen(false);
+            setProfileNavOpen(false);
             setSearchNavOpen((searchNavOpen) => !searchNavOpen);
           }}
         >
@@ -40,6 +44,8 @@ function HeaderNavigation() {
           aria-label="toggle profile menu button"
           className='nav-profile-button'
           onClick={() => {
+            setSearchNavOpen(false);
+            setLogoNavOpen(false);
             setProfileNavOpen((profileNavOpen) => !profileNavOpen);
           }}
         >
