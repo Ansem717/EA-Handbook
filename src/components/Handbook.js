@@ -1,12 +1,12 @@
 import '../css/handbook.css';
 import HandbookPage from './HandbookPage';
-import HandbookNavigation from './HandbookNavigation';
+import Contribute from './ContribueButton';
 
 function Handbook() {
   return (
     <div className='handbook'>
       <HandbookPage />
-      <HandbookNavigation />
+      <Contribute />
     </div>
   );
 }

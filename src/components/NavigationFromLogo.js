@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import downArrow from '../images/down_arrow.svg';
 import '../css/navigation-from-logo.css';
 import classNames from 'classnames';
 
-function NavigationFromLogo({ open }) {
+function NavigationFromLogo(props) {
   const displayLogoNavLinks = classNames('navigation-from-logo', {
-    open: open,
+    open: props.open,
   });
 
   const [handbookSubOpen, setHandbookSubOpen] = useState(false);
@@ -32,8 +32,24 @@ function NavigationFromLogo({ open }) {
     open: aboutSubOpen,
   })
 
+  const ref = useRef(null);
+  const buttonRef = props.buttonRef;
+  const { onClickOutside } = props;
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+        onClickOutside && onClickOutside();
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [ onClickOutside, buttonRef ]);
+
   return (
-    <nav className={displayLogoNavLinks}>
+    <nav ref={ref} className={displayLogoNavLinks}>
         <ul className="nfl-main">
           <li>
             <button className='sub-button'

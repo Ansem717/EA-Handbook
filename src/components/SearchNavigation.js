@@ -3,11 +3,11 @@ import { TextField, InputAdornment, Box } from '@mui/material';
 import SearchResults from './SearchResults';
 import '../css/search-navigation.css';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-function SearchNavigation({ open }) {
+function SearchNavigation(props) {
   const displaySearchNav = classNames('search-navigation', {
-    open: open,
+    open: props.open,
   });
 
   const [inputText, setInputText] = useState("");
@@ -16,8 +16,24 @@ function SearchNavigation({ open }) {
     setInputText(lowercase);
   }
 
+  const ref = useRef(null);
+  const buttonRef = props.buttonRef;
+  const { onClickOutside } = props;
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
+        onClickOutside && onClickOutside();
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [ onClickOutside, buttonRef ]);
+
   return (
-    <nav className={displaySearchNav}>
+    <nav ref={ref} className={displaySearchNav}>
       <Box m={1}>
         <TextField
             id="outlined-basic"
