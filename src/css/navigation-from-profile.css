@@ -1,0 +1,46 @@
+
+.navigation-from-profile {
+    background-color: #F0F2FA;
+    z-index: 1;
+    position: fixed;
+    top: 100px;
+    width: 270px;
+
+    /*Hide content*/
+    left: -270px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.75s, visibility 0.75s, left 0.75s;
+    overflow: hidden;
+}
+
+.navigation-from-profile.open {
+    opacity: 1;
+    visibility: visible;
+    left: 6px;
+}
+
+.nfp-main  {
+    list-style: none;
+    padding-inline-start: 10px;
+}
+
+.nfp-main>ul {
+    list-style: none;
+    padding-inline-start: 25px;
+}
+
+.nfp-main>li {
+    display: flex;
+    font-family: "Open Sans", Arial;
+    font-size: 14.67px;
+    font-weight: bold;
+    margin-bottom: 21px;
+    color: #024;
+    align-items: center;
+}
+
+.nfp-icon {
+    width:25px;
+    padding-right: 15px;
+}

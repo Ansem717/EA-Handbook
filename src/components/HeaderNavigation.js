@@ -5,10 +5,12 @@ import profileIcon from '../images/profile.svg';
 import '../css/header-navigation.css';
 import NavigationFromLogo from './NavigationFromLogo';
 import SearchNavigation from './SearchNavigation';
+import ProfileNavigation from './ProfileNavigation';
 
 function HeaderNavigation() {
   const [logoNavOpen, setLogoNavOpen] = useState(false);
   const [searchNavOpen, setSearchNavOpen] = useState(false);
+  const [profileNavOpen, setProfileNavOpen] = useState(false);
 
   return (
     <nav className="nav">
@@ -34,7 +36,16 @@ function HeaderNavigation() {
         </button>
         <SearchNavigation open={searchNavOpen} />
 
-        <img src={profileIcon} className="nav-profile" alt="profile" />
+        <button
+          aria-label="toggle profile menu button"
+          className='nav-profile-button'
+          onClick={() => {
+            setProfileNavOpen((profileNavOpen) => !profileNavOpen);
+          }}
+        >
+          <img src={profileIcon} className="nav-profile" alt="profile" />
+        </button>
+        <ProfileNavigation open={profileNavOpen} />
     </nav>
   );
 }
