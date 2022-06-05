@@ -1,5 +1,5 @@
 import searchIcon from '../images/magnifying_glass.svg';
-import { TextField, InputAdornment, Box } from '@mui/material';
+import { TextField, InputAdornment, Grid } from '@mui/material';
 import SearchResults from './SearchResults';
 import '../css/search-navigation.css';
 import classNames from 'classnames';
@@ -17,39 +17,69 @@ function SearchNavigation(props) {
   }
 
   const ref = useRef(null);
-  const buttonRef = props.buttonRef;
-  const { onClickOutside } = props;
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
-        onClickOutside && onClickOutside();
-      }
+    const clearTextbox = (event) => {
+      console.log("useEffect clearTextbox onTransitionEnd");
+      event.target.value = "";
+      setInputText("");
     };
-    document.addEventListener('click', handleClickOutside, true);
+
+    const refCurr = ref.current;
+
+    refCurr.addEventListener('transitionend', clearTextbox, true);
     return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+      refCurr.addEventListener('transitionend', clearTextbox, true);
     };
-  }, [ onClickOutside, buttonRef ]);
+  }, []);
 
   return (
     <nav ref={ref} className={displaySearchNav}>
-      <Box m={1}>
+      <Grid container direction="column" className="search-container">
+        <button
+          aria-label='Close Search Button'
+          className='close-search-bar-button'
+          onClick={() => {
+            props.onClickOutside()
+          }}
+        >
+          <div className='close-search-bar one'></div>
+          <div className='close-search-bar two'></div>
+        </button>
         <TextField
             id="outlined-basic"
             variant="outlined"
             onChange={searchHandler}
-            className='search-box'
+            className='search-field'
+
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                props.onClickOutside();
+                console.log("onKeyPress Enter");
+                ev.target.value = "";
+                setInputText("");
+                ev.preventDefault();
+              }
+            }}
+
+            sx={{
+              minWidth: 0.4,
+              mr: 20
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="start">
                   <img src={searchIcon} className="search-icon" alt="search" />
                 </InputAdornment>
               ),
+              style: {
+                fontSize: 20,
+                fontWeight: 'bold'
+              }
             }}
         />
-      </Box>
       <SearchResults input={inputText} />
+      </Grid>
     </nav>
   );
 }

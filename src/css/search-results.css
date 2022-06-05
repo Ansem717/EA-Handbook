@@ -2,15 +2,19 @@
 .search-results {
     list-style-type: none;
     padding-inline-start: 20px;
-    height: calc(100vh - 170px);
-    overflow: scroll;
+    margin-top: 20px;
+    height: calc(100vh - 120px);
+    width: 100vw;
+    overflow-y: scroll;   
+    text-align: center;
 }
 
 .search-results > li {
-    margin: 20px 0px;
+    margin: 40px 0px;
+    margin-right: 12vw;
     font-family: Arial, Arial;
-    font-size: 14px;
-    font-weight: 400;
-    color: #000000;
-    padding: 0px 0px 0px 5px;
+    font-size: 25px;
+    font-weight:bold;
+    color: #ddd;
+    justify-content: center;
 }
