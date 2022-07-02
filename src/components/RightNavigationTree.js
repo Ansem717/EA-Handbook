@@ -1,12 +1,9 @@
-import classNames from "classnames";
+import '../css/right-navigation-tree.css';
 
-function ContributeMenu({ open }) {
-  const displayContributeMenu = classNames('contribute-sidebar', {
-    open: open,
-  });
+function RightNavigationTree(props) {
 
   return (
-    <div className={displayContributeMenu}>
+    <div className="right-navigation-tree">
       <ul>
         <li>Parent Topic</li>
         <li>Previous Topic</li>
@@ -32,4 +29,4 @@ function ContributeMenu({ open }) {
   );
 }
 
-export default ContributeMenu;
+export default RightNavigationTree;

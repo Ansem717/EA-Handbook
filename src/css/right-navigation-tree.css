@@ -1,0 +1,15 @@
+
+.right-navigation-tree {
+    background-color: #def;
+    width: 218px;
+    overflow: hidden;
+}
+
+.right-navigation-tree  > ul, .right-navigation-tree  > ul > li > ul {
+    list-style-type: none;
+    padding-inline-start: 15px;
+}
+
+.right-navigation-tree  > ul > li, .right-navigation-tree  > ul > li > ul > li  {
+    padding-bottom: 10px;
+}

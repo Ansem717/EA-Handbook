@@ -1,7 +1,7 @@
 
-
 .contribute-main {
-    padding-right: 50px;
+    padding-right: 40px;
+    padding-left: 20px;
     min-width:180px;
     font-family: Arial, Arial;
     font-size: 14px;
@@ -9,59 +9,7 @@
     line-height: 21px;
 }
 
-/** HIDE INITIAL BUTTON **/
-.contribute-button.open {
-    opacity: 1;
-    visibility: visible;
-}
-
 .contribute-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s;
-}
-
-/** BRING IN SAVE AND CANCEL **/
-.contribute-edit-button {
-    position: relative;
-    top: -50px;
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s;
-}
-
-.contribute-edit-button.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-/** MENU ITSELF **/
-.contribute-sidebar {
-    background-color: #62929e;
-    z-index: 1;
-    position: fixed;
-    top: 140px;
-    width: 218px;
-    right: 0;
-    overflow: hidden;
-}
-
-.contribute-sidebar > ul, .contribute-sidebar > ul > li > ul {
-    list-style-type: none;
-    padding-inline-start: 15px;
-}
-
-.contribute-sidebar > ul > li, .contribute-sidebar > ul > li > ul > li  {
-    padding-bottom: 10px;
-}
-
-.save-button, .cancel-button, .edit-button {
     background: none;
     border: none;
     display: flex;
@@ -72,10 +20,5 @@
 
 .hamburger {
     width: 30px;
-    padding: 7px;
-}
-
-.save, .cancel {
-    width:20px;
     padding: 7px;
 }
