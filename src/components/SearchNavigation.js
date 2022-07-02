@@ -47,6 +47,7 @@ function SearchNavigation(props) {
                 </InputAdornment>
               ),
             }}
+            sx={{ input: { color: '#eeeeee' } }}
         />
       </Box>
       <SearchResults input={inputText} />

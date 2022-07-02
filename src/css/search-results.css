@@ -7,10 +7,10 @@
 }
 
 .search-results > li {
-    margin: 20px 0px;
+    margin: 15px 0px;
     font-family: Arial, Arial;
     font-size: 14px;
     font-weight: 400;
-    color: #000000;
-    padding: 0px 0px 0px 5px;
+    color: #eee;
+    padding: 0px 0px 0px 3px;
 }

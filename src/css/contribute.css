@@ -43,25 +43,13 @@
 
 /** MENU ITSELF **/
 .contribute-sidebar {
-    background-color: #cff;
+    background-color: #62929e;
     z-index: 1;
-    box-shadow: inset 0 0 0 2px #777;
     position: fixed;
     top: 140px;
     width: 218px;
-
-    /*Hide content*/
-    right: -218px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.75s, visibility 0.75s, right 0.75s;
+    right: 0;
     overflow: hidden;
-}
-
-.contribute-sidebar.open {
-    opacity: 1;
-    visibility: visible;
-    right: 6px;
 }
 
 .contribute-sidebar > ul, .contribute-sidebar > ul > li > ul {

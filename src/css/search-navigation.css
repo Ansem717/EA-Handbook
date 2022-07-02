@@ -1,6 +1,7 @@
 
 .search-navigation {
-    background-color: #DDDCF2;
+    background-color: #615756;
+    box-shadow: 0 0 0 1px  #000;
     z-index: 1;
     position: fixed;
     top: 100px;
@@ -21,6 +22,7 @@
 }
 
 .search-box {
-    background-color: #eee;
-    width: calc(var(--width) - 1em)
+    background-color: #322;
+    width: calc(var(--width) - 1em);
+    color: #eee;
 }
