@@ -9,6 +9,7 @@ function SearchResults(props) {
       return el.text.toLowerCase().includes(props.input);
     }
   })
+  
   return (
     <ul className='search-results'>
       {filteredData.map((item) => (

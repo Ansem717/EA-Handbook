@@ -1,10 +1,10 @@
 import '../css/handbook-page.css';
 import { marked } from 'marked';
 
-function HandbookPage(params) {
+function HandbookPage(props) {
 
-  const title = params.title;
-  const content = params.content;
+  const title = props.title;
+  const content = props.content;
 
   const parsedContent = marked(content);
 

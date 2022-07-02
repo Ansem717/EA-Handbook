@@ -4,7 +4,7 @@ import '../css/contribute.css';
 import RightNavigationTree from './RightNavigationTree';
 import classNames from 'classnames';
 
-function Contribute() {
+function Contribute(props) {
   const [contributeOpen, setContributeOpen] = useState(false);
 
   const displayContributeButton = classNames('contribute-button', {
@@ -25,7 +25,9 @@ function Contribute() {
         </button>
       </p>
 
-      <RightNavigationTree />
+      {/* TODO: Implement Contribute Menu */}
+
+      <RightNavigationTree nextTopic={props.nextTopic} prevTopic={props.prevTopic} parentTopic={props.parentTopic} subTopics={props.subTopics} />
     </div>
   );
 }

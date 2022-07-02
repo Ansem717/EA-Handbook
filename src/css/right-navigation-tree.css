@@ -13,3 +13,8 @@
 .right-navigation-tree  > ul > li, .right-navigation-tree  > ul > li > ul > li  {
     padding-bottom: 10px;
 }
+
+.null {
+    font-style: italic;
+    color:#888;
+}

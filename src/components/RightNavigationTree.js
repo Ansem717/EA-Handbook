@@ -2,28 +2,41 @@ import '../css/right-navigation-tree.css';
 
 function RightNavigationTree(props) {
 
+  const parentTopic = (props.parentTopic[0] === 0) ?
+                        (<li className='null'>Parent Topic</li>) :
+                        (<li><b>Parent Topic:</b><br />
+                          <a href={'/'+props.parentTopic[0]}>{props.parentTopic[1]}</a>
+                        </li>);
+
+  const prevTopic = (props.prevTopic[0] === 0) ?
+                      (<li className='null'>Previous Topic</li>) :
+                      (<li><b>Previous Topic:</b><br />
+                        <a href={'/'+props.prevTopic[0]}>{props.prevTopic[1]}</a>
+                      </li>);
+
+  const nextTopic = (props.nextTopic[0] === 0) ?
+                      (<li className='null'>Next Topic</li>) :
+                      (<li><b>Next Topic:</b><br />
+                        <a href={'/'+props.nextTopic[0]}>{props.nextTopic[1]}</a>
+                      </li>);
+
+  const subTopics = (props.subTopics.length === 0) ?
+                      (<li className="null">Subtopics</li>) :
+                      (<li><b>Subtopics:</b>
+                        <ul>
+                          {props.subTopics.map((e) => (
+                            <li key={e.id}><a href={'/'+e.id}>{e.attributes.title}</a></li>
+                          ))}
+                        </ul>
+                      </li>)
+
   return (
     <div className="right-navigation-tree">
       <ul>
-        <li>Parent Topic</li>
-        <li>Previous Topic</li>
-        <li>Next Topic</li>
-        <li>Subtopics:
-          <ul>
-            <li>Definitions and Metamodel</li>
-            <li>Useful Concepts and Ideas</li>
-            <li>Career Path and Education</li>
-            <li>Running an EA Practice</li>
-            <li>Business Architecture</li>
-            <li>Information Architecture</li>
-            <li>Enterprise Solution Architecture</li>
-            <li>Technology Security and Network Architecture</li>
-            <li>Digital Transformation</li>
-            <li>Techniques to achieve results</li>
-            <li>Case Studies in EA</li>
-            <li>Research Requests and Results</li>
-          </ul>
-        </li>
+        {parentTopic}
+        {prevTopic}
+        {nextTopic}
+        {subTopics}
       </ul>
     </div>
   );
