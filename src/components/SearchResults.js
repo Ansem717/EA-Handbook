@@ -3,21 +3,33 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function SearchResults(props) {
-  const [topicsToSearch, updateTopicsToSearch] = useState([]);
+  const [contentToSearch, updateContentToSearch] = useState([]);
 
   useEffect(() => {
-    const fetchURL = 'http://190.92.148.137:1337/api/topics/?populate=parentTopic';
+    const topicsURL = 'http://190.92.148.137:1337/api/topics/?populate=parentTopic';
     //Get all topics and their linked parent topic
+    
+    const articlesURL = 'http://190.92.148.137:1337/api/articles/'
+    //get all articles
 
-    axios(fetchURL)
+    axios(topicsURL)
       .then(response => {
         const data = response.data.data;
         data.forEach(topic => {
-          updateTopicsToSearch(arr => [...arr, topic]);
+          updateContentToSearch(arr => [...arr, topic]);
         });
       })
       .catch(error => console.log(error));
 
+    axios(articlesURL)
+      .then(response => {
+        const data = response.data.data;
+        data.forEach(article => {
+          updateContentToSearch(arr => [...arr, article]);
+        });
+      })
+      .catch(error => console.log(error));
+    
     // const keyDownHandlerSearchResult = (event) => {
     //   if (event.key === 'Enter') {
     //     event.preventDefault();
@@ -31,13 +43,14 @@ function SearchResults(props) {
 
   }, []);
 
-  const filteredData = topicsToSearch.filter((topic) => {
+  const filteredData = contentToSearch.filter((content) => {
     if (props.input.length < 3) {
-      return (!topic.attributes.parentTopic.data || 
-             (topic.attributes.parentTopic.data && topic.attributes.parentTopic.data.id === 1)
+      return (content.attributes.parentTopic && 
+             (!content.attributes.parentTopic.data || 
+             (content.attributes.parentTopic.data && content.attributes.parentTopic.data.id === 1))
              );
     } else {
-      return (topic.attributes.title.toLowerCase().includes(props.input) || topic.attributes.content.toLowerCase().includes(props.input));
+      return (content.attributes.title.toLowerCase().includes(props.input) || content.attributes.content.toLowerCase().includes(props.input));
     }
   })
   
