@@ -80,7 +80,6 @@ class Handbook extends Component {
     const fetchURL = 'http://190.92.148.137:1337/api/topics';
     const populate = '?populate=*';
     let target = window.location.pathname;
-    console.log(target);
     if (target === '/') target = '/1';
     axios(fetchURL + target + populate)
       .then(response => {

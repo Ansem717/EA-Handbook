@@ -9,8 +9,24 @@
 .search-results > li {
     margin: 15px 0px;
     font-family: Arial, Arial;
-    font-size: 14px;
-    font-weight: 400;
-    color: #eee;
     padding: 0px 0px 0px 3px;
+}
+
+.search-results > li > a {
+    text-decoration: none;
+}
+
+.search-result-title { 
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    color: #eee;
+}
+
+.search-result-content {
+    font-weight: normal;
+    font-style: italic;
+    color: #aaa;
+    font-size: 14px;
 }

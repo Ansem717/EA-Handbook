@@ -26,8 +26,18 @@ function SearchNavigation(props) {
         onClickOutside && onClickOutside();
       }
     };
+    
+    // const keyDownHandlerClose = (event) => {
+    //   if (event.key === 'Enter') {
+    //     event.preventDefault();
+    //     onClickOutside();
+    //   }
+    // }
+
+    // document.addEventListener('keydown', keyDownHandlerClose)
     document.addEventListener('click', handleClickOutside, true);
     return () => {
+      // document.removeEventListener('keydown', keyDownHandlerClose);
       document.removeEventListener('click', handleClickOutside, true);
     };
   }, [ onClickOutside, buttonRef ]);
