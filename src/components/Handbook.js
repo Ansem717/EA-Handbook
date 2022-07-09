@@ -76,30 +76,45 @@ class Handbook extends Component {
       .catch(error => this.setState({error, isLoading:false}));
   }
 
+  getArticles(currentID, getStatic) {
+    const fetchURL = 'http://190.92.148.137:1337/api/articles/?populate=*';
+
+  }
+
   componentDidMount() {
-    const fetchURL = 'http://190.92.148.137:1337/api/topics';
+    const fetchURL = 'http://190.92.148.137:1337/api';
     const populate = '?populate=*';
     let target = window.location.pathname;
-    if (target === '/') target = '/1';
+    if (target === '/') target = '/topics/1';
+    const type = target.split("/")[1]; //"topics" or "articles"
+    if (type !== 'topics' && type !== 'articles') {console.error("Incorrect URL. Halt"); return;}
     axios(fetchURL + target + populate)
       .then(response => {
         const data = response.data.data.attributes;
         const title = data.title;
         const content = data.content;
-        const parentTopic = data.parentTopic.data ? [data.parentTopic.data.id, data.parentTopic.data.attributes.title] : [0, ''];
-        
-        this.getSiblings(response.data.data.id, parentTopic[0]);
 
-        const subTopics = [];
-        for (const subtopic of data.subtopics.data) {
-          subTopics.push(subtopic);
-        };
+        if(type==='topics') {
+          const parentTopic = data.parentTopic.data ? [data.parentTopic.data.id, data.parentTopic.data.attributes.title] : [0, ''];
+          
+          this.getSiblings(response.data.data.id, parentTopic[0]);
+
+          const subTopics = [];
+          for (const subtopic of data.subtopics.data) {
+            subTopics.push(subtopic);
+          };
+
+          this.setState({
+            parentTopic,
+            subTopics
+          });
+        } else if (type === 'articles') {
+          this.getArticles(response.data.data.id, false);
+        }
 
         this.setState({
           title,
           content,
-          parentTopic,
-          subTopics,
           isLoading: false
         });
       })
@@ -115,7 +130,7 @@ class Handbook extends Component {
             <HandbookPage title={title} content={content}/>
             <Contribute nextTopic={nextTopic} prevTopic={prevTopic} parentTopic={parentTopic} subTopics={subTopics} />
           </>
-        ) : ("Loading...")}
+        ) : ("Loading... If this takes a while, make sure your URL is correct.")}
       </div>
     );
   }

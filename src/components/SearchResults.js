@@ -4,6 +4,8 @@ import axios from 'axios';
 
 function SearchResults(props) {
   const [contentToSearch, updateContentToSearch] = useState([]);
+  const topicENDPOINT = '/topics/'
+  const articleENDPOINT = '/articles/'
 
   useEffect(() => {
     const topicsURL = 'http://190.92.148.137:1337/api/topics/?populate=parentTopic';
@@ -57,9 +59,8 @@ function SearchResults(props) {
   return (
     <ul className='search-results'>
       {filteredData.map((item) => (
-                // console.log(item.id)
-                <li key={item.id}><a href={'/'+item.id}><span className='search-result-title'>{item.attributes.title}</span>
-                <br /><span className='search-result-content'>Lorem Ipsum higlighting filter result</span></a></li>
+        <li key={item.id}><a href={(item.attributes.parentTopic ? topicENDPOINT : articleENDPOINT) + item.id}><span className='search-result-title'>{item.attributes.title}</span>
+        <br /><span className='search-result-content'>Lorem Ipsum higlighting filter result</span></a></li>
       ))}
     </ul>
   );
