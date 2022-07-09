@@ -1,6 +1,6 @@
 import '../css/handbook.css';
 import HandbookPage from './HandbookPage';
-import Contribute from './ContribueButton';
+import ContributeButtonAndRightNav from './ContribueButtonAndRightNav';
 import { Component } from 'react';
 import axios from 'axios';
 
@@ -13,6 +13,7 @@ class Handbook extends Component {
     prevTopic: 0,
     nextTopic: 0,
     subTopics: [],
+    articles: [],
     isLoading: true,
     error: null
   }
@@ -76,9 +77,23 @@ class Handbook extends Component {
       .catch(error => this.setState({error, isLoading:false}));
   }
 
-  getArticles(currentID, getStatic) {
+  getArticles(getStaticArticles) {
     const fetchURL = 'http://190.92.148.137:1337/api/articles/?populate=*';
+    axios(fetchURL)
+    .then(response => {
+        const articles = [];
+        const data = response.data.data;
+        for(const article of data) {
+          if (article.attributes.isStatic === getStaticArticles) {
+            articles.push(article);
+          }
+        }
 
+        this.setState({
+          articles
+        })
+      })
+      .catch(error => this.setState({error, isLoading:false}));
   }
 
   componentDidMount() {
@@ -109,7 +124,7 @@ class Handbook extends Component {
             subTopics
           });
         } else if (type === 'articles') {
-          this.getArticles(response.data.data.id, false);
+          this.getArticles(false);
         }
 
         this.setState({
@@ -122,13 +137,16 @@ class Handbook extends Component {
   }
 
   render() {
-    const { isLoading, title, content, nextTopic, prevTopic, parentTopic, subTopics } = this.state;
+    const { isLoading, title, content, nextTopic, prevTopic, parentTopic, subTopics, articles } = this.state;
+    const CBARN = (parentTopic === 0) ?
+      <ContributeButtonAndRightNav type='article' articles={articles} /> :
+      <ContributeButtonAndRightNav type='topic' nextTopic={nextTopic} prevTopic={prevTopic} parentTopic={parentTopic} subTopics={subTopics} />
     return (
       <div className='handbook'>
         {!isLoading ? (
           <>
             <HandbookPage title={title} content={content}/>
-            <Contribute nextTopic={nextTopic} prevTopic={prevTopic} parentTopic={parentTopic} subTopics={subTopics} />
+            {CBARN}
           </>
         ) : ("Loading... If this takes a while, make sure your URL is correct.")}
       </div>

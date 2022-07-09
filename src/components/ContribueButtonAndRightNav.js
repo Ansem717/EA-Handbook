@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import hamburger from '../images/hamburger_menu_icon.svg';
 import '../css/contribute.css';
-import RightNavigationTree from './RightNavigationTree';
+import RightNavigationTreeTopics from './RightNavigationTreeTopics';
+import RightNavigationTreeArticles from './RightNavigationTreeArticles';
 import classNames from 'classnames';
 
-function Contribute(props) {
+function ContributeButtonAndRightNav(props) {
   const [contributeOpen, setContributeOpen] = useState(false);
 
   const displayContributeButton = classNames('contribute-button', {
     open: !contributeOpen,
   });
+
+  const RightTree = (props.type === 'article') ?
+    <RightNavigationTreeArticles articles={props.articles} /> :
+    <RightNavigationTreeTopics nextTopic={props.nextTopic} prevTopic={props.prevTopic} parentTopic={props.parentTopic} subTopics={props.subTopics} />;
 
   return (
     <div className='contribute-main'>
@@ -27,9 +32,9 @@ function Contribute(props) {
 
       {/* TODO: Implement Contribute Menu */}
 
-      <RightNavigationTree nextTopic={props.nextTopic} prevTopic={props.prevTopic} parentTopic={props.parentTopic} subTopics={props.subTopics} />
+      {RightTree}
     </div>
   );
 }
 
-export default Contribute;
+export default ContributeButtonAndRightNav;
