@@ -30,62 +30,14 @@
     padding-inline-start: 25px;
 }
 
-.nfl-main>li {
-    font-family: "Open Sans", Arial;
-    font-size: 14.67px;
-    font-weight: 400;
+.nfl-main > li {
     margin-bottom: 21px;
-    color: #024;
 }
 
-.nfl-sub, .nfl-sub-small {
-    opacity: 0;
-    visibility: hidden;
-    max-height: 0;
-    transition: opacity 0.75s, visibility 0.75s, max-height 0.75s;
-    overflow: hidden;
-}
-
-.nfl-sub.open {
-    opacity: 1;
-    max-height: 135px;
-    visibility: visible;
-}
-
-.nfl-sub-small.open {
-    opacity: 1;
-    max-height: 75px;
-    visibility: visible;
-}
-
-.nfl-sub>li, .nfl-sub-small>li {
+.nfl-main > li > a {
     font-family: "Open Sans", Arial;
-    font-size: 14.67px;
+    font-size: 15px;
     font-weight: 400;
-    margin-bottom: 21px;
-    color: #246;
-}
-
-.sub-button {
-    background: none;
-    border: none;
-    font-family: "Open Sans", Arial;
-    font-size: 14.67px;
-    font-weight: 400;
-    margin-bottom: 4px;
-    margin-top: 4px;
     color: #024;
-}
-
-.left-arrow {
-    position: absolute;
-    right: 8px;
-    transform: rotate(-90deg);
-    transition: all 0.3s ease-in;
-}
-
-.left-arrow.open {
-    position: absolute;
-    right: 8px;
-    transform: rotate(0deg);
+    text-decoration: none;
 }

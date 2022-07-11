@@ -20,8 +20,8 @@ class Handbook extends Component {
 
   getSiblings(currentId, parentTopicID) {
     //0) VARIABLES
-    const fetchURL = 'http://190.92.148.137:1337/api/topics/';
-    const populate = '?populate=*';
+    const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_TOPICS;
+    const populate = '?'+process.env.REACT_APP_POPULATE_STAR;
     let prevTopic = [];
     let nextTopic = [];
 
@@ -77,16 +77,14 @@ class Handbook extends Component {
       .catch(error => this.setState({error, isLoading:false}));
   }
 
-  getArticles(getStaticArticles) {
-    const fetchURL = 'http://190.92.148.137:1337/api/articles/?populate=*';
+  getArticlesNotStatic() {
+    const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES + '?' + process.env.REACT_APP_IS_NOT_STATIC + '&' + process.env.REACT_APP_SORT_UPDATED;
     axios(fetchURL)
     .then(response => {
         const articles = [];
         const data = response.data.data;
         for(const article of data) {
-          if (article.attributes.isStatic === getStaticArticles) {
             articles.push(article);
-          }
         }
 
         this.setState({
@@ -97,8 +95,8 @@ class Handbook extends Component {
   }
 
   componentDidMount() {
-    const fetchURL = 'http://190.92.148.137:1337/api';
-    const populate = '?populate=*';
+    const fetchURL = process.env.REACT_APP_URL;
+    const populate = '?' + process.env.REACT_APP_POPULATE_STAR;
     let target = window.location.pathname;
     if (target === '/') target = '/topics/1';
     const type = target.split("/")[1]; //"topics" or "articles"
@@ -124,7 +122,7 @@ class Handbook extends Component {
             subTopics
           });
         } else if (type === 'articles') {
-          this.getArticles(false);
+          this.getArticlesNotStatic();
         }
 
         this.setState({

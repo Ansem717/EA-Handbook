@@ -4,14 +4,12 @@ import axios from 'axios';
 
 function SearchResults(props) {
   const [contentToSearch, updateContentToSearch] = useState([]);
-  const topicENDPOINT = '/topics/'
-  const articleENDPOINT = '/articles/'
 
   useEffect(() => {
-    const topicsURL = 'http://190.92.148.137:1337/api/topics/?populate=parentTopic';
+    const topicsURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_TOPICS + '?' + process.env.REACT_APP_POPULATE_PARENT;
     //Get all topics and their linked parent topic
     
-    const articlesURL = 'http://190.92.148.137:1337/api/articles/'
+    const articlesURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES;
     //get all articles
 
     axios(topicsURL)
@@ -59,7 +57,7 @@ function SearchResults(props) {
   return (
     <ul className='search-results'>
       {filteredData.map((item) => (
-        <li key={item.id}><a href={(item.attributes.parentTopic ? topicENDPOINT : articleENDPOINT) + item.id}><span className='search-result-title'>{item.attributes.title}</span>
+        <li key={item.id}><a href={(item.attributes.parentTopic ? process.env.REACT_APP_URL_TOPICS : process.env.REACT_APP_URL_ARTICLES) + item.id}><span className='search-result-title'>{item.attributes.title}</span>
         <br /><span className='search-result-content'>Lorem Ipsum higlighting filter result</span></a></li>
       ))}
     </ul>

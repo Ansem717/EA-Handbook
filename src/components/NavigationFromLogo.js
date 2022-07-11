@@ -1,41 +1,30 @@
-import { useState, useEffect, useRef } from 'react';
-import downArrow from '../images/down_arrow.svg';
+import { useEffect, useRef, useState } from 'react';
 import '../css/navigation-from-logo.css';
 import classNames from 'classnames';
+import axios from 'axios';
 
 function NavigationFromLogo(props) {
   const displayLogoNavLinks = classNames('navigation-from-logo', {
     open: props.open,
   });
 
-  const [handbookSubOpen, setHandbookSubOpen] = useState(false);
-  const displayHandbookSubLinks = classNames('nfl-sub', {
-    open: handbookSubOpen,
-  });
-  const displayHandbookArrow = classNames('left-arrow', {
-    open: handbookSubOpen,
-  })
-
-  const [memberSubOpen, setMemberSubOpen] = useState(false);
-  const displayMemberSubLinks = classNames('nfl-sub-small', {
-    open: memberSubOpen,
-  });
-  const displayMemberArrow = classNames('left-arrow', {
-    open: memberSubOpen,
-  })
-
-  const [aboutSubOpen, setAboutSubOpen] = useState(false);
-  const displayAboutSubLinks = classNames('nfl-sub-small', {
-    open: aboutSubOpen,
-  });
-  const displayAboutArrow = classNames('left-arrow', {
-    open: aboutSubOpen,
-  })
-
   const ref = useRef(null);
   const buttonRef = props.buttonRef;
   const { onClickOutside } = props;
 
+  const [staticArticles, updateStaticArticles] = useState([]);
+
+  useEffect(() => {
+    const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES + '?' + process.env.REACT_APP_IS_STATIC + '&' + process.env.REACT_APP_SORT_ORDER;
+    axios(fetchURL)
+      .then(response => {
+        const data = response.data.data;
+        for(const article of data) {
+          updateStaticArticles(arr => [...arr, article]);
+        }
+      }).catch(error => {console.error("Error when fetching static articles in NavigationFromLogo.js")});
+    }, []);
+    
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (ref.current && !ref.current.contains(event.target) && !buttonRef.current.contains(event.target)) {
@@ -51,46 +40,11 @@ function NavigationFromLogo(props) {
   return (
     <nav ref={ref} className={displayLogoNavLinks}>
         <ul className="nfl-main">
-          <li>
-            <button className='sub-button'
-             onClick={() => {
-               setHandbookSubOpen((handbookSubOpen) => !handbookSubOpen);
-             }}
-            >
-              EA Handbook Project <img src={downArrow} className={displayHandbookArrow} alt=""/>
-            </button>
-          </li>
-          <ul className={displayHandbookSubLinks}>
-            <li>Why build a handbook?</li>
-            <li>The power of community</li>
-            <li>Reliable Sources and Forward Thinkers</li>
-          </ul>
-          <li>
-            <button className='sub-button'
-             onClick={() => {
-               setMemberSubOpen((memberSubOpen) => !memberSubOpen);
-             }}
-            >
-              Become a member <img src={downArrow} className={displayMemberArrow} alt="" />
-            </button>
-          </li>
-          <ul className={displayMemberSubLinks}>
-            <li>Join</li>
-            <li>Donate</li>
-          </ul>
-          <li>
-            <button className='sub-button'
-             onClick={() => {
-               setAboutSubOpen((aboutSubOpen) => !aboutSubOpen);
-             }}
-            >
-              More about us <img src={downArrow} className={displayAboutArrow} alt="" />
-            </button>
-          </li>
-          <ul className={displayAboutSubLinks}>
-            <li>Meet the Team</li>
-            <li>Contact Us</li>
-          </ul>
+          {staticArticles.map((article) => (
+            <li key={article.id}>
+              <a href={process.env.REACT_APP_URL_ARTICLES + article.id}>{article.attributes.title}</a>
+            </li>
+          ))}
         </ul>
     </nav>
   );
