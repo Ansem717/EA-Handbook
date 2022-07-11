@@ -14,6 +14,7 @@ class Handbook extends Component {
     nextTopic: 0,
     subTopics: [],
     articles: [],
+    isStaticArticle: false,
     isLoading: true,
     error: null
   }
@@ -122,7 +123,8 @@ class Handbook extends Component {
             subTopics
           });
         } else if (type === 'articles') {
-          this.getArticlesNotStatic();
+          if (!data.isStatic) this.getArticlesNotStatic();
+          this.setState({isStaticArticle: data.isStatic});
         }
 
         this.setState({
@@ -135,9 +137,9 @@ class Handbook extends Component {
   }
 
   render() {
-    const { isLoading, title, content, nextTopic, prevTopic, parentTopic, subTopics, articles } = this.state;
+    const { isLoading, title, content, nextTopic, prevTopic, parentTopic, subTopics, articles, isStaticArticle } = this.state;
     const CBARN = (parentTopic === 0) ?
-      <ContributeButtonAndRightNav type='article' articles={articles} /> :
+      <ContributeButtonAndRightNav type='article' static={isStaticArticle} articles={articles} /> :
       <ContributeButtonAndRightNav type='topic' nextTopic={nextTopic} prevTopic={prevTopic} parentTopic={parentTopic} subTopics={subTopics} />
     return (
       <div className='handbook'>

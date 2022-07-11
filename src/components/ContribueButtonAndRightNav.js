@@ -13,7 +13,7 @@ function ContributeButtonAndRightNav(props) {
   });
 
   const RightTree = (props.type === 'article') ?
-    <RightNavigationTreeArticles articles={props.articles} /> :
+    <RightNavigationTreeArticles static={props.static} articles={props.articles} /> :
     <RightNavigationTreeTopics nextTopic={props.nextTopic} prevTopic={props.prevTopic} parentTopic={props.parentTopic} subTopics={props.subTopics} />;
 
   return (

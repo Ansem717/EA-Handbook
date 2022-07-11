@@ -16,6 +16,7 @@ function NavigationFromLogo(props) {
 
   useEffect(() => {
     const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES + '?' + process.env.REACT_APP_IS_STATIC + '&' + process.env.REACT_APP_SORT_ORDER;
+    console.log(fetchURL);
     axios(fetchURL)
       .then(response => {
         const data = response.data.data;

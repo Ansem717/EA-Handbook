@@ -14,6 +14,10 @@
     padding-bottom: 10px;
 }
 
+.right-navigation-tree.hidden {
+    display: none;
+}
+
 .null {
     font-style: italic;
     color:#888;
