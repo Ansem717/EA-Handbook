@@ -78,8 +78,8 @@ class Handbook extends Component {
       .catch(error => this.setState({error, isLoading:false}));
   }
 
-  getArticlesNotStatic() {
-    const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES + '?' + process.env.REACT_APP_IS_NOT_STATIC + '&' + process.env.REACT_APP_SORT_UPDATED;
+  getArticlesNotStatic(callback) {
+    const fetchURL = process.env.REACT_APP_URL + process.env.REACT_APP_URL_ARTICLES + '?' + process.env.REACT_APP_IS_NOT_STATIC + '&' + process.env.REACT_APP_SORT_UPDATED + '&' + process.env.REACT_APP_POPULATE_STAR;
     axios(fetchURL)
     .then(response => {
         const articles = [];
@@ -90,6 +90,10 @@ class Handbook extends Component {
 
         this.setState({
           articles
+        }, () => {
+          if (callback && typeof(callback) === 'function') {
+            callback();
+          }
         })
       })
       .catch(error => this.setState({error, isLoading:false}));
@@ -100,40 +104,62 @@ class Handbook extends Component {
     const populate = '?' + process.env.REACT_APP_POPULATE_STAR;
     let target = window.location.pathname;
     if (target === '/') target = '/topics/1';
+
     const type = target.split("/")[1]; //"topics" or "articles"
     if (type !== 'topics' && type !== 'articles') {console.error("Incorrect URL. Halt"); return;}
-    axios(fetchURL + target + populate)
-      .then(response => {
-        const data = response.data.data.attributes;
-        const title = data.title;
-        const content = data.content;
 
-        if(type==='topics') {
-          const parentTopic = data.parentTopic.data ? [data.parentTopic.data.id, data.parentTopic.data.attributes.title] : [0, ''];
-          
-          this.getSiblings(response.data.data.id, parentTopic[0]);
-
-          const subTopics = [];
-          for (const subtopic of data.subtopics.data) {
-            subTopics.push(subtopic);
-          };
-
-          this.setState({
-            parentTopic,
-            subTopics
-          });
-        } else if (type === 'articles') {
-          if (!data.isStatic) this.getArticlesNotStatic();
-          this.setState({isStaticArticle: data.isStatic});
+    const target2 = target.split("/")[2]; //numerical destination or word "index"
+    if (target2 === 'index') {
+      this.getArticlesNotStatic(() => {
+        const { articles } = this.state;
+        const title = "Articles"
+        let content = "";
+        for(const article of articles) {
+          //LINKS IN MARKDOWN : [Name](url)
+          content+="#### [" + article.attributes.title + "](" + process.env.REACT_APP_URL_ARTICLES + article.id + ")\n"
         }
 
         this.setState({
           title,
           content,
-          isLoading: false
+          isLoading: false,
+          isStaticArticle: true
         });
-      })
+      });
+    } else {
+      axios(fetchURL + target + populate)
+        .then(response => {
+          const data = response.data.data.attributes;
+          const title = data.title;
+          const content = data.content;
+
+          if(type==='topics') {
+            const parentTopic = data.parentTopic.data ? [data.parentTopic.data.id, data.parentTopic.data.attributes.title] : [0, ''];
+            
+            this.getSiblings(response.data.data.id, parentTopic[0]);
+
+            const subTopics = [];
+            for (const subtopic of data.subtopics.data) {
+              subTopics.push(subtopic);
+            };
+
+            this.setState({
+              parentTopic,
+              subTopics
+            });
+          } else if (type === 'articles') {
+            if (!data.isStatic) this.getArticlesNotStatic();
+            this.setState({isStatic: data.isStatic});
+          }
+
+          this.setState({
+            title,
+            content,
+            isLoading: false
+          });
+        })
       .catch(error => this.setState({error, isLoading:false}));
+    }
   }
 
   render() {

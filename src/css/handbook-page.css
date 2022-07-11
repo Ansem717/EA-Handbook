@@ -1,5 +1,9 @@
 
-.page {
+.page { 
+    min-width: 75vw;
+}
+
+.page-content {
     margin-left: 40px;
     margin-top: 25px;
     font-family: Arial, Arial;
@@ -8,8 +12,8 @@
     color: #333333;
 }
 
-.bookTitle {
-    padding-left: 18px;
-    padding-top: 10px;
+.page-title {
+    padding-left: 36px;
     margin-bottom: -10px;
+    font-size: 22px;
 }

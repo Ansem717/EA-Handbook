@@ -9,9 +9,9 @@ function HandbookPage(props) {
   const parsedContent = marked(content);
 
   return (
-    <div>
-      <h3 className='bookTitle'>{title}</h3>
-      <p className='page' dangerouslySetInnerHTML={{__html: parsedContent}} ></p>
+    <div className="page">
+      <h3 className='page-title'>{title}</h3>
+      <p className='page-content' dangerouslySetInnerHTML={{__html: parsedContent}} ></p>
     </div>
   );
 }
