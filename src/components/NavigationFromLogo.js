@@ -41,8 +41,8 @@ function NavigationFromLogo(props) {
   return (
     <nav ref={ref} className={displayLogoNavLinks}>
         <ul className="nfl-main">
-          <li><a href={process.env.REACT_APP_URL_ARTICLES + 'index'}>Articles</a></li> 
           <li><a href='/'>EA Handbook</a></li> 
+          <li><a href={process.env.REACT_APP_URL_ARTICLES + 'index'}>Articles</a></li> 
           {staticArticles.map((article) => (
             <li key={article.id}>
               <a href={process.env.REACT_APP_URL_ARTICLES + article.id}>{article.attributes.title}</a>

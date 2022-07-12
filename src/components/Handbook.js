@@ -115,7 +115,9 @@ class Handbook extends Component {
         const title = "Articles"
         let content = "";
         for(const article of articles) {
-          //LINKS IN MARKDOWN : [Name](url)
+          //content is formatted via markdown
+          //<h3><a href=url>Title</a></h3>
+          //### [Title](url)\n
           content+="#### [" + article.attributes.title + "](" + process.env.REACT_APP_URL_ARTICLES + article.id + ")\n"
         }
 
@@ -149,7 +151,7 @@ class Handbook extends Component {
             });
           } else if (type === 'articles') {
             if (!data.isStatic) this.getArticlesNotStatic();
-            this.setState({isStatic: data.isStatic});
+            this.setState({isStaticArticle: data.isStatic});
           }
 
           this.setState({
